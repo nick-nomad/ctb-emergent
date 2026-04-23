@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Custom Timber Buildings</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Header (same as index.html) -->
+    <header class="header">
+        <div class="top-bar">
+            <div class="container">
+                <div class="top-bar-content">
+                    <a href="tel:01935891195" class="phone-link">
+                        <span>📞</span> 01935 891195
+                    </a>
+                    <span class="tagline">We Cannot Be Beaten On Price!</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="main-header">
+            <div class="container">
+                <div class="header-content">
+                    <a href="index.html" class="logo">
+                        <h1>Custom Timber Buildings</h1>
+                        <p>Quality Timber Structures Since 1990</p>
+                    </a>
+                    <a href="contact.html" class="cta-button desktop-only">Get Free Quote</a>
+                    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                        <span class="hamburger"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <nav class="nav-bar">
+            <div class="container">
+                <ul class="nav-menu">
+                    <li><a href="beach-huts.html">Beach Huts</a></li>
+                    <li><a href="stables.html">Stables</a></li>
+                    <li><a href="field-shelters.html">Field Shelters</a></li>
+                    <li><a href="garages.html">Garages</a></li>
+                    <li><a href="garden-rooms.html">Garden Rooms</a></li>
+                    <li><a href="sheds.html">Sheds</a></li>
+                    <li><a href="summer-houses.html">Summer Houses</a></li>
+                    <li><a href="workshops.html">Workshops</a></li>
+                    <li><a href="contact.html" class="contact-link">Contact Us</a></li>
+                </ul>
+            </div>
+        </nav>
+        
+        <div class="mobile-menu" id="mobileMenu">
+            <ul>
+                <li><a href="beach-huts.html">Beach Huts</a></li>
+                <li><a href="stables.html">Stables</a></li>
+                <li><a href="field-shelters.html">Field Shelters</a></li>
+                <li><a href="garages.html">Garages</a></li>
+                <li><a href="garden-rooms.html">Garden Rooms</a></li>
+                <li><a href="sheds.html">Sheds</a></li>
+                <li><a href="summer-houses.html">Summer Houses</a></li>
+                <li><a href="workshops.html">Workshops</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <img src="https://images.unsplash.com/photo-1768042299463-4a817fc7c4de?w=1600" alt="Contact Us" class="page-hero-image">
+        <div class="page-hero-overlay"></div>
+        <div class="page-hero-content">
+            <h1>Contact Us</h1>
+            <p>Get in touch for a free, no-obligation quote</p>
+        </div>
+    </section>
+
+    <!-- Contact Cards -->
+    <section class="content-section">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">📞</div>
+                    <h3 style="color: #2d5016; margin-bottom: 0.5rem;">Phone</h3>
+                    <a href="tel:01935891195" style="color: #555; text-decoration: none; font-size: 1.125rem;">01935 891195</a>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon">✉️</div>
+                    <h3 style="color: #2d5016; margin-bottom: 0.5rem;">Email</h3>
+                    <a href="mailto:info@customtimberbuildings.co.uk" style="color: #555; text-decoration: none;">info@customtimberbuildings.co.uk</a>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon">📍</div>
+                    <h3 style="color: #2d5016; margin-bottom: 0.5rem;">Location</h3>
+                    <p style="color: #555; margin: 0;">Yeovil, Somerset<br>United Kingdom</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="content-section" style="padding-top: 0;">
+        <div class="container">
+            <div class="contact-grid">
+                <!-- Form -->
+                <div style="grid-column: span 2;">
+                    <div class="form-card">
+                        <h2 style="color: #2d5016; margin-bottom: 1.5rem;">Send Us a Message</h2>
+                        <form onsubmit="handleContactSubmit(event)">
+                            <div class="form-group">
+                                <label for="name">Name *</label>
+                                <input type="text" id="name" name="name" required placeholder="Your name">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone">Phone</label>
+                                <input type="tel" id="phone" name="phone" placeholder="Your phone number">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message">Message *</label>
+                                <textarea id="message" name="message" required placeholder="Tell us about your project..."></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Info -->
+                <div>
+                    <div class="form-card">
+                        <h3 style="color: #2d5016; margin-bottom: 1rem;">Why Choose Us?</h3>
+                        <div style="margin-bottom: 1.5rem;">
+                            <div style="display: flex; gap: 0.75rem; margin-bottom: 1rem;">
+                                <span class="checkmark" style="margin-top: 0.25rem;">✓</span>
+                                <div>
+                                    <strong style="color: #2d5016;">100% Customizable</strong>
+                                    <p style="color: #666; font-size: 0.875rem; margin: 0;">Every aspect tailored to your needs</p>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; gap: 0.75rem; margin-bottom: 1rem;">
+                                <span class="checkmark" style="margin-top: 0.25rem;">✓</span>
+                                <div>
+                                    <strong style="color: #2d5016;">30+ Years Experience</strong>
+                                    <p style="color: #666; font-size: 0.875rem; margin: 0;">Expert craftsmanship you can trust</p>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; gap: 0.75rem; margin-bottom: 1rem;">
+                                <span class="checkmark" style="margin-top: 0.25rem;">✓</span>
+                                <div>
+                                    <strong style="color: #2d5016;">Nationwide Delivery</strong>
+                                    <p style="color: #666; font-size: 0.875rem; margin: 0;">UK, Channel Islands & Europe</p>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; gap: 0.75rem;">
+                                <span class="checkmark" style="margin-top: 0.25rem;">✓</span>
+                                <div>
+                                    <strong style="color: #2d5016;">Competitive Pricing</strong>
+                                    <p style="color: #666; font-size: 0.875rem; margin: 0;">We cannot be beaten on price</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-card" style="margin-top: 1.5rem;">
+                        <h3 style="color: #2d5016; margin-bottom: 1rem;">Business Hours</h3>
+                        <div style="color: #555;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                <span>Monday - Friday:</span>
+                                <strong>9:00 AM - 5:30 PM</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                <span>Saturday:</span>
+                                <strong>9:00 AM - 1:00 PM</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>Sunday:</span>
+                                <strong>Closed</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Custom Timber Buildings</h3>
+                    <p>Manufacturers of quality timber buildings with over 30 years of experience.</p>
+                    <div class="social-links">
+                        <a href="#">Facebook</a>
+                        <a href="#">Twitter</a>
+                        <a href="#">Instagram</a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Popular Buildings</h4>
+                    <ul>
+                        <li><a href="sheds.html">Sheds</a></li>
+                        <li><a href="garages.html">Garages</a></li>
+                        <li><a href="stables.html">Stables</a></li>
+                        <li><a href="garden-rooms.html">Garden Rooms</a></li>
+                        <li><a href="field-shelters.html">Field Shelters</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Contact Us</h4>
+                    <ul class="contact-info">
+                        <li>📞 <a href="tel:01935891195">01935 891195</a></li>
+                        <li>✉️ <a href="mailto:info@customtimberbuildings.co.uk">info@customtimberbuildings.co.uk</a></li>
+                        <li>📍 Yeovil, Somerset, UK</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Custom Timber Buildings Ltd. All rights reserved.</p>
+                <p>Delivering throughout the UK, Channel Islands, and to Europe</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

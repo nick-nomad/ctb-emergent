@@ -1,4 +1,6 @@
 from fastapi import FastAPI, APIRouter
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -21,6 +23,11 @@ db = client[os.environ['DB_NAME']]
 
 # Create the main app without a prefix
 app = FastAPI()
+
+# Mount static files for HTML website
+static_path = Path(__file__).parent.parent / "frontend" / "public"
+app.mount("/css", StaticFiles(directory=str(static_path / "css")), name="css")
+app.mount("/js", StaticFiles(directory=str(static_path / "js")), name="js")
 
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
@@ -68,6 +75,20 @@ async def get_status_checks():
 
 # Include the router in the main app
 app.include_router(api_router)
+
+# Serve HTML files
+@app.get("/")
+async def serve_index():
+    return FileResponse(str(static_path / "index.html"))
+
+@app.get("/{page_name}")
+async def serve_html_page(page_name: str):
+    # Serve HTML pages
+    html_file = static_path / f"{page_name}.html"
+    if html_file.exists():
+        return FileResponse(str(html_file))
+    # If not found, return index
+    return FileResponse(str(static_path / "index.html"))
 
 app.add_middleware(
     CORSMiddleware,
