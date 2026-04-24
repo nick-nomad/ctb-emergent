@@ -76,20 +76,6 @@ async def get_status_checks():
 # Include the router in the main app
 app.include_router(api_router)
 
-# Serve HTML files
-@app.get("/")
-async def serve_index():
-    return FileResponse(str(static_path / "index.html"))
-
-@app.get("/{page_name}")
-async def serve_html_page(page_name: str):
-    # Serve HTML pages
-    html_file = static_path / f"{page_name}.html"
-    if html_file.exists():
-        return FileResponse(str(html_file))
-    # If not found, return index
-    return FileResponse(str(static_path / "index.html"))
-
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
@@ -97,6 +83,27 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Serve HTML files - AFTER middleware and API routes
+@app.get("/")
+async def serve_index():
+    return FileResponse(str(static_path / "index.html"))
+
+# List of valid HTML pages
+valid_pages = [
+    "contact", "sheds", "garages", "stables", "field-shelters", 
+    "garden-rooms", "summer-houses", "workshops", "beach-huts", "gallery"
+]
+
+@app.get("/{page_name}")
+async def serve_html_page(page_name: str):
+    # Only serve if it's a valid page name
+    if page_name in valid_pages:
+        html_file = static_path / f"{page_name}.html"
+        if html_file.exists():
+            return FileResponse(str(html_file))
+    # If not found, return index
+    return FileResponse(str(static_path / "index.html"))
 
 # Configure logging
 logging.basicConfig(
