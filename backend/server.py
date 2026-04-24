@@ -1,6 +1,6 @@
 from fastapi import FastAPI, APIRouter
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, HTMLResponse
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -21,15 +21,17 @@ mongo_url = os.environ['MONGO_URL']
 client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
 
-# Create the main app without a prefix
+# Create the main app
 app = FastAPI()
 
-# Mount static files for HTML website
-static_path = Path(__file__).parent.parent / "frontend" / "public"
-app.mount("/css", StaticFiles(directory=str(static_path / "css")), name="css")
-app.mount("/js", StaticFiles(directory=str(static_path / "js")), name="js")
+# Path to HTML files
+html_path = Path(__file__).parent.parent / "frontend" / "public"
 
-# Create a router with the /api prefix
+# Mount static file directories
+app.mount("/css", StaticFiles(directory=str(html_path / "css")), name="css")
+app.mount("/js", StaticFiles(directory=str(html_path / "js")), name="js")
+
+# Create API router
 api_router = APIRouter(prefix="/api")
 
 
@@ -79,31 +81,28 @@ app.include_router(api_router)
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
-    allow_origins=os.environ.get('CORS_ORIGINS', '*').split(','),
+    allow_origins=["*"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Serve HTML files - AFTER middleware and API routes
-@app.get("/")
-async def serve_index():
-    return FileResponse(str(static_path / "index.html"))
+# Serve static HTML pages
+@app.get("/", response_class=HTMLResponse)
+async def serve_home():
+    html_file = html_path / "index.html"
+    if html_file.exists():
+        return HTMLResponse(content=html_file.read_text(), status_code=200)
+    return HTMLResponse(content="<h1>Site under construction</h1>", status_code=404)
 
-# List of valid HTML pages
-valid_pages = [
-    "contact", "sheds", "garages", "stables", "field-shelters", 
-    "garden-rooms", "summer-houses", "workshops", "beach-huts", "gallery"
-]
-
-@app.get("/{page_name}")
-async def serve_html_page(page_name: str):
-    # Only serve if it's a valid page name
-    if page_name in valid_pages:
-        html_file = static_path / f"{page_name}.html"
-        if html_file.exists():
-            return FileResponse(str(html_file))
-    # If not found, return index
-    return FileResponse(str(static_path / "index.html"))
+@app.get("/{page_name}", response_class=HTMLResponse)
+async def serve_page(page_name: str):
+    # Try to serve the HTML file
+    html_file = html_path / f"{page_name}.html"
+    if html_file.exists():
+        return HTMLResponse(content=html_file.read_text(), status_code=200)
+    
+    # If not found, return 404 or home
+    return HTMLResponse(content="<h1>Page not found</h1>", status_code=404)
 
 # Configure logging
 logging.basicConfig(
